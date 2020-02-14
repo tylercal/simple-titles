@@ -1,0 +1,23 @@
+<idea-plugin>
+    <id>com.roomj.simpletitles</id>
+    <name>Simple Titles</name>
+    <version>1.1</version>
+    <vendor url="https://github.com/tylercal/simple-titles">Tyler Elliott</vendor>
+
+    <description><![CDATA[
+      Limit the file part of the window title only include the file name.
+
+      Windows speech recognition fails when a window title is too long, this alleviates the problem.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <idea-version since-build="131"/>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceInterface="com.intellij.openapi.wm.impl.FrameTitleBuilder"
+                            serviceImplementation="com.roomj.simpletitles.SimpleFrameTitleBuilder"
+                            overrides="true"
+        />
+    </extensions>
+</idea-plugin>
