@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.roomj'
-version '1.1'
+version '1.3'
 
 sourceCompatibility = 1.8
 
@@ -18,10 +18,13 @@ dependencies {
 
 intellij {
     version '2019.3.2'
+    updateSinceUntilBuild false
 }
 
 patchPluginXml {
     changeNotes """
+      <strong>1.3:</strong> Actually fix compatibility range<br>
+      <strong>1.2:</strong> Try to Fix compatibility range<br>
       <strong>1.1:</strong> updating to use non-deprecated APIs<br>
       <strong>1.0:</strong> initial version<br>"""
 }

@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.roomj.simpletitles</id>
     <name>Simple Titles</name>
-    <version>1.1</version>
+    <version>1.2</version>
     <vendor url="https://github.com/tylercal/simple-titles">Tyler Elliott</vendor>
 
     <description><![CDATA[
@@ -12,7 +12,7 @@
 
     <depends>com.intellij.modules.platform</depends>
 
-    <idea-version since-build="131"/>
+    <idea-version since-build="131" />
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceInterface="com.intellij.openapi.wm.impl.FrameTitleBuilder"
