@@ -23,6 +23,8 @@ public class TitleSettingComponent {
                 .addComponent(new JBLabel(" "))
                 .addLabeledComponent(new JBLabel("Project Format"), projectFormatText, 1, false)
                 .addLabeledComponent(new JBLabel("File Format"), fileFormatText, 1, false)
+                .addComponent(new JBLabel(" "))
+                .addComponent(new JBLabel("Leave format blank to omit that data from the title"))
                 .addComponentFillVertically(new JPanel(), 0)
                 .getPanel();
     }
