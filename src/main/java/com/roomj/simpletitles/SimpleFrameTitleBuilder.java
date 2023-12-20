@@ -18,6 +18,9 @@ public class SimpleFrameTitleBuilder extends PlatformFrameTitleBuilder {
     if (title.contains("{SIMPLE}")) {
       title = title.replace("{SIMPLE}", project.getName());
     }
+    if (title.contains("{BASEDIR}")) {
+      title = title.replace("{BASEDIR}", project.getBaseDir().getName());
+    }
     return title;
   }
 
@@ -29,6 +32,9 @@ public class SimpleFrameTitleBuilder extends PlatformFrameTitleBuilder {
     }
     if (title.contains("{SIMPLE}")) {
       title = title.replace("{SIMPLE}", virtualFile.getName());
+    }
+    if (title.contains("{BASEDIR}")) {
+      title = title.replace("{BASEDIR}", project.getBaseDir().getName());
     }
     return title;
   }
