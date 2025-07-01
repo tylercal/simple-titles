@@ -39,6 +39,9 @@ intellijPlatform {
       <strong>1.0:</strong> initial version<br>
     """.trimIndent()
     }
+    publishing {
+        token = providers.gradleProperty("intellijPlatformPublishingToken")
+    }
 }
 
 kotlin {

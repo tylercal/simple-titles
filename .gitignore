@@ -44,3 +44,6 @@ gradle-app.setting
 
 # The Hub Token is stored here, don't check it in
 /gradle.properties
+
+# Platform files
+/.intellijPlatform/*
