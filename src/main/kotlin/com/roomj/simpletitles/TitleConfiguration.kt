@@ -1,68 +1,56 @@
-package com.roomj.simpletitles;
+package com.roomj.simpletitles
 
-import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.ProjectManager;
-import com.intellij.openapi.project.ex.ProjectEx;
-import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.options.Configurable
+import com.intellij.openapi.project.ProjectManager
+import com.intellij.openapi.project.ex.ProjectEx
+import org.jetbrains.annotations.Nls
+import javax.swing.JComponent
 
-import javax.swing.*;
-
-public class TitleConfiguration implements Configurable {
-
-    private TitleSettingComponent settingComponent;
+class TitleConfiguration : Configurable {
+    private var settingComponent: TitleSettingComponent? = null
 
     @Nls(capitalization = Nls.Capitalization.Title)
-    @Override
-    public String getDisplayName() {
-        return "Simple Title Format";
+    override fun getDisplayName(): String = "Simple Title Format"
+
+    override fun getPreferredFocusedComponent(): JComponent? = settingComponent?.preferredFocusedComponent
+
+    override fun createComponent(): JComponent? {
+        settingComponent = TitleSettingComponent()
+        return settingComponent?.panel
     }
 
-    @Override
-    public JComponent getPreferredFocusedComponent() {
-        return settingComponent.getPreferredFocusedComponent();
+    override fun isModified(): Boolean {
+        val state = TitleSettingsState.getInstance()
+        return settingComponent?.projectFormat != state.projectFormat ||
+                settingComponent?.fileFormat != state.fileFormat
     }
 
-    @Nullable
-    @Override
-    public JComponent createComponent() {
-        settingComponent = new TitleSettingComponent();
-        return settingComponent.getPanel();
+    override fun apply() {
+        TitleSettingsState.getInstance().apply {
+            fileFormat = settingComponent?.fileFormat ?: fileFormat
+            projectFormat = settingComponent?.projectFormat ?: projectFormat
+        }
+        triggerTitleRefresh()
     }
 
-    @Override
-    public boolean isModified() {
-        TitleSettingsState state = TitleSettingsState.getInstance();
-        return !settingComponent.getProjectFormat().equals(state.projectFormat) || !settingComponent.getFileFormat().equals(state.fileFormat);
-    }
-
-    @Override
-    public void apply() {
-        TitleSettingsState.getInstance().fileFormat = settingComponent.getFileFormat();
-        TitleSettingsState.getInstance().projectFormat = settingComponent.getProjectFormat();
-
-        triggerTitleRefresh();
-    }
-
-    private void triggerTitleRefresh() {
-        Project firstProject = ProjectManager.getInstance().getOpenProjects()[0];
-        if (firstProject instanceof ProjectEx) {
-            String oldName = firstProject.getName();
-            ((ProjectEx) firstProject).setProjectName("");
-            ((ProjectEx) firstProject).setProjectName(oldName);
+    private fun triggerTitleRefresh() {
+        val firstProject = ProjectManager.getInstance().openProjects.firstOrNull() ?: return
+        if (firstProject is ProjectEx) {
+            val oldName = firstProject.name
+            firstProject.setProjectName("")
+            firstProject.setProjectName(oldName)
         }
     }
 
-    @Override
-    public void reset() {
-        TitleSettingsState state = TitleSettingsState.getInstance();
-        settingComponent.setProjectFormatText(state.projectFormat);
-        settingComponent.setFileFormatText(state.fileFormat);
+    override fun reset() {
+        val state = TitleSettingsState.getInstance()
+        settingComponent?.apply {
+            setProjectFormatText(state.projectFormat)
+            setFileFormatText(state.fileFormat)
+        }
     }
 
-    @Override
-    public void disposeUIResources() {
-        settingComponent = null;
+    override fun disposeUIResources() {
+        settingComponent = null
     }
 }
