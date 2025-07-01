@@ -24,7 +24,8 @@ public class TitleSettingComponent {
                 .addLabeledComponent(new JBLabel("Project Format"), projectFormatText, 1, false)
                 .addLabeledComponent(new JBLabel("File Format"), fileFormatText, 1, false)
                 .addComponent(new JBLabel(" "))
-                .addComponent(new JBLabel("Leave format blank to omit that data from the title"))
+                .addComponent(new JBLabel("Leave format blank to omit that data from the title."))
+                .addComponent(new JBLabel("Changes to Project Format require IDE restart to take effect."))
                 .addComponentFillVertically(new JPanel(), 0)
                 .getPanel();
     }

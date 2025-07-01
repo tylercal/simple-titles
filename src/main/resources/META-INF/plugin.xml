@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.roomj.simpletitles</id>
     <name>Simple Titles</name>
-    <version>1.5</version>
+    <version>1.6</version>
     <vendor url="https://github.com/tylercal/simple-titles">Tyler Elliott</vendor>
 
     <description><![CDATA[
